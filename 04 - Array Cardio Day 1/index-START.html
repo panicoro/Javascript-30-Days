@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -24,42 +26,126 @@
       { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
       { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
       { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
-      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
+      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 },
     ];
 
     const people = [
-      'Bernhard, Sandra', 'Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd', 'Beckett, Samuel', 'Blake, William', 'Berger, Ric', 'Beddoes, Mick', 'Beethoven, Ludwig',
-      'Belloc, Hilaire', 'Begin, Menachem', 'Bellow, Saul', 'Benchley, Robert', 'Blair, Robert', 'Benenson, Peter', 'Benjamin, Walter', 'Berlin, Irving',
-      'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano',
-      'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
-      'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
+      'Bernhard, Sandra',
+      'Bethea, Erin',
+      'Becker, Carl',
+      'Bentsen, Lloyd',
+      'Beckett, Samuel',
+      'Blake, William',
+      'Berger, Ric',
+      'Beddoes, Mick',
+      'Beethoven, Ludwig',
+      'Belloc, Hilaire',
+      'Begin, Menachem',
+      'Bellow, Saul',
+      'Benchley, Robert',
+      'Blair, Robert',
+      'Benenson, Peter',
+      'Benjamin, Walter',
+      'Berlin, Irving',
+      'Benn, Tony',
+      'Benson, Leana',
+      'Bent, Silas',
+      'Berle, Milton',
+      'Berry, Halle',
+      'Biko, Steve',
+      'Beck, Glenn',
+      'Bergman, Ingmar',
+      'Black, Elk',
+      'Berio, Luciano',
+      'Berne, Eric',
+      'Berra, Yogi',
+      'Berry, Wendell',
+      'Bevan, Aneurin',
+      'Ben-Gurion, David',
+      'Bevel, Ken',
+      'Biden, Joseph',
+      'Bennington, Chester',
+      'Bierce, Ambrose',
+      'Billings, Josh',
+      'Birrell, Augustine',
+      'Blair, Tony',
+      'Beecher, Henry',
+      'Biondo, Frank',
     ];
-    
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const invertors1500 = inventors.filter(
+      (inventor) => inventor.year >= 1500 && inventor.year < 1600
+    );
+    console.log(invertors1500);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-
+    const inventorsData = inventors.map(
+      (inventor) => `${inventor.first} ${inventor.last}`
+    );
+    console.log(inventorsData);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    function sortedByAge(inventorA, inventorB) {
+      return inventorA.year - inventorB.year;
+    }
+    const investorsSorted = inventors.sort(sortedByAge);
+    console.table(investorsSorted);
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    function reducerByLibving(totalAge, CurrentInventor) {
+      const amountLiving = CurrentInventor.passed - CurrentInventor.year;
+      return totalAge + amountLiving;
+    }
 
+    const sumOfLiving = inventors.reduce(reducerByLibving, 0);
+    console.log(sumOfLiving);
     // 5. Sort the inventors by years lived
+    function sortedByLiving(inventorA, inventorB) {
+      const livingA = inventorA.passed - inventorA.year;
+      const livingB = inventorB.passed - inventorB.year;
+      return livingB - livingA;
+    }
+    const investorsSortedByLiving = inventors.sort(sortedByLiving);
+    console.table(investorsSortedByLiving);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    const alphaOrder = people.sort((personA, personB) => {
+      const [lastNameA] = personA.split(', ');
+      const [lastNameB] = personB.split(', ');
+      return lastNameB > lastNameA ? -1 : 1;
+    });
+    console.log(alphaOrder);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const data = [
+      'car',
+      'car',
+      'truck',
+      'truck',
+      'bike',
+      'walk',
+      'car',
+      'van',
+      'bike',
+      'walk',
+      'car',
+      'van',
+      'car',
+      'truck',
+    ];
+    const transportation = data.reduce((currentData, item) => {
+      currentData[item] = currentData[item] + 1 || 1;
+      return currentData;
+    }, {});
+    console.log(transportation);
   </script>
 </body>
+
 </html>
